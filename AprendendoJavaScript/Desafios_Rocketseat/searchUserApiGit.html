@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+            <title>Js Assincrono Exercício 2</title>
+        </head>
+        <body>
+            
+            <input type="text" name="user">
+            <button onclick="listRepositories()">Add</button>
+
+  <ul></ul>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    var listElement = document.querySelector('ul'); //listElement recebe a ul
+    var inputElement = document.querySelector('input'); //inputElement recebe o input
+    function renderRepositories(repositories) {
+      for (repo of repositories) {
+        const textElement = document.createTextNode(repo.name);
+        const liElement = document.createElement('li'); //criando uma li dentro de uma ul
+        liElement.appendChild(textElement); //amarrando o texto digitado no liElement
+        listElement.appendChild(liElement); //amarrando o liElement e tudo que existe dentro dele, dentro do listElement
+      }
+    }
+
+    function renderLoading(loading){
+        listElement.innerHTML = "";
+        var textElement = document.createTextNode('Carregando...');
+        var loadingElement = document.createElement('li');
+        loadingElement.appendChild(textElement);
+        listElement.appendChild(loadingElement);
+    }
+
+    function renderError(loading){
+        listElement.innerHTML = "";
+        var textElement = document.createTextNode('Error');
+        var errorElement = document.createElement('li');
+        errorElement.style.color = "#F00";
+        errorElement.appendChild(textElement);
+        listElement.appendChild(errorElement);
+    }
+
+    function listRepositories() {
+      var user = inputElement.value; //user recebe o inputElement que pega o valor que foi digitado dentro do input que é armazenado dentro de uma ul
+      if (!user) return;
+      axios.get('https://api.github.com/users/' + user + '/repos')
+        .then(function (response) {
+          renderRepositories(response.data);
+        })
+        .catch(function(){
+            renderError();
+        });
+    }
+         
+        </script>
+</html>
+

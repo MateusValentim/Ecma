@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Trabalhando com a DOM</title>
+    </head>
+    <!--Referenciando ELEMENTOS DA DOM pelo JS-->
+    <body>
+        <div id="app">
+            <input type="text" name="nome" id="nome" class="nome"/>
+           <!-- <input type="text" name="nome"/> -->
+            <input type="text" name="nome" id="nome2" class="nome"/>
+            <button class="botao">Adicionar</button>
+         </div>
+        <script>
+            //var inputElement = document.getElementById('nome'); 
+            //var inputElement = document.getElementsByTagName('input')[1]
+            //var inputElement = document.getElementsByClassName('nome')[1]
+            //var inputElement = document.querySelector('div#app input'); //Não preciso colocar o BODY   
+            //var inputElement = document.querySelector('input[name=nome]');
+            //var inputElement = document.querySelectorAll('input');
+            var inputElement = document.querySelector('input[name=nome]');
+            var btnElement = document.querySelector('button.botao');
+
+            btnElement.onclick = function() {
+                var text = inputElement.value;
+                alert(text); //recuperando texto digitado no INPUT
+                //alert('Botão clicado');
+            }
+            
+        </script>
+    </body>
+</html>
